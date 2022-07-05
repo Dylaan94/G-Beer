@@ -17,8 +17,10 @@ import {
   View,
 } from 'react-native';
 
+
 import SignInScreen from "./src/screens/SignInScreen"
 import WelcomeScreen from "./src/screens/WelcomeScreen"
+import RegistrationScreen from './src/screens/RegistrationScreen';
 
 
 
@@ -26,7 +28,8 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.root}>
-      <WelcomeScreen></WelcomeScreen>
+      {/* <WelcomeScreen></WelcomeScreen> */}
+      <RegistrationScreen/>
     </SafeAreaView>
   );
 };
@@ -34,8 +37,7 @@ const App = () => {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-  }
-
+  },
 });
 
 export default App;
