@@ -2,14 +2,18 @@ import React, {useState} from 'react';
 import {View, Text, Image, StyleSheet, useWindowDimensions} from 'react-native';
 import Logo from '../../../assets/images/Logo_HQ.png';
 
-import CustomInputFull from '../../components/CustomInputFull';
-import CustomInputHalf from '../../components/CustomInputHalf';
+import CustomInputFull from '../../components/CustomInput';
+import CustomButton from '../../components/CustomButton';
 
 const RegistrationScreen = () => {
   const [username, setUsername] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
+
+  const onSignUpPressed = () => {
+    console.warn('Sign up');
+  };
 
   const {height} = useWindowDimensions();
   return (
@@ -25,15 +29,17 @@ const RegistrationScreen = () => {
         value={username}
         setValue={setUsername}
       />
-      <CustomInputHalf
+      <CustomInputFull
         placeholder="First Name"
         value={firstName}
         setValue={setFirstName}
+        type="HALF"
       />
-      <CustomInputHalf
+      <CustomInputFull
         placeholder="Last Name"
         value={lastName}
         setValue={setLastName}
+        type="HALF"
       />
       <CustomInputFull
         placeholder="Password"
@@ -41,7 +47,9 @@ const RegistrationScreen = () => {
         setValue={setPassword}
         secureTextEntry={true}
       />
-      <CustomInputFull placeholder="Confirm Password" />
+      <CustomInputFull placeholder="Confirm Password" secureTextEntry={true} />
+
+      <CustomButton text="Sign Up" onPress={onSignUpPressed} />
     </View>
   );
 };
