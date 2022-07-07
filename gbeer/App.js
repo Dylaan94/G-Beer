@@ -17,20 +17,18 @@ import {
   View,
 } from 'react-native';
 
-
-import SignInScreen from "./src/screens/SignInScreen"
-import WelcomeScreen from "./src/screens/WelcomeScreen"
+import SignInScreen from './src/screens/SignInScreen';
+import WelcomeScreen from './src/screens/WelcomeScreen';
 import RegistrationScreen from './src/screens/RegistrationScreen';
-
-
+import ConfirmSignUpScreen from './src/screens/ConfirmSignUpScreen';
 
 const App = () => {
-
   return (
     <SafeAreaView style={styles.root}>
       {/* <WelcomeScreen></WelcomeScreen> */}
       {/* <SignInScreen></SignInScreen> */}
-      <RegistrationScreen/>
+      {/* <RegistrationScreen/> */}
+      <ConfirmSignUpScreen />
     </SafeAreaView>
   );
 };
