@@ -35,10 +35,13 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   container_HALF: {
-    width: '35%',
+    width: '39%',
+    marginRight: '1%',
+    marginLeft: '1%',
   },
   input: {
     textAlign: 'center',
+    color: 'gray',
   },
 });
 

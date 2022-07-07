@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {View, Text, Image, StyleSheet, useWindowDimensions} from 'react-native';
+import {View, Text, Image, StyleSheet, useWindowDimensions, ScrollView} from 'react-native';
 import Logo from '../../../assets/images/Logo_HQ.png';
 
-import CustomInputFull from '../../components/CustomInput';
+import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
 const RegistrationScreen = () => {
@@ -16,47 +16,58 @@ const RegistrationScreen = () => {
   };
 
   const {height} = useWindowDimensions();
-  return (
-    <View style={styles.root}>
-      <Image
-        source={Logo}
-        style={[styles.logo, {height: height * 0.15}]}
-        resizeMode="contain"
-      />
-      <Text style={styles.text}> Register for G Beer</Text>
-      <CustomInputFull
-        placeholder="Username"
-        value={username}
-        setValue={setUsername}
-      />
-      <CustomInputFull
-        placeholder="First Name"
-        value={firstName}
-        setValue={setFirstName}
-        type="HALF"
-      />
-      <CustomInputFull
-        placeholder="Last Name"
-        value={lastName}
-        setValue={setLastName}
-        type="HALF"
-      />
-      <CustomInputFull
-        placeholder="Password"
-        value={password}
-        setValue={setPassword}
-        secureTextEntry={true}
-      />
-      <CustomInputFull placeholder="Confirm Password" secureTextEntry={true} />
+    return (
+      <ScrollView>
+        <View style={styles.root}>
+          <Image
+            source={Logo}
+            style={[styles.logo, {height: height * 0.15}]}
+            resizeMode="contain"
+          />
+          <Text style={styles.text}> Register for G Beer</Text>
+          <CustomInput
+            placeholder="Username"
+            value={username}
+            setValue={setUsername}
+          />
+          <View style={styles.nameRoot}>
+            <CustomInput
+              placeholder="First Name"
+              value={firstName}
+              setValue={setFirstName}
+              type="HALF"
+            />
+            <CustomInput
+              placeholder="Last Name"
+              value={lastName}
+              setValue={setLastName}
+              type="HALF"
+            />
+          </View>
 
-      <CustomButton text="Sign Up" onPress={onSignUpPressed} />
-    </View>
-  );
+          <CustomInput
+            placeholder="Password"
+            value={password}
+            setValue={setPassword}
+            secureTextEntry={true}
+          />
+          <CustomInput placeholder="Confirm Password" secureTextEntry={true} />
+
+          <View style={styles.signUpBtn}>
+            <CustomButton text="Sign Up" onPress={onSignUpPressed} />
+          </View>
+        </View>
+      </ScrollView>
+    );
 };
 
 const styles = StyleSheet.create({
   root: {
     alignItems: 'center',
+    
+  },
+  nameRoot: {
+    flexDirection: 'row',
   },
   logo: {
     marginTop: 10,
@@ -70,6 +81,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 50,
     marginTop: 30,
+  },
+  signUpBtn: {
+      marginTop: 150,
   },
 });
 
