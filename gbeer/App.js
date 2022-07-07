@@ -29,8 +29,8 @@ const App = () => {
   return (
     <SafeAreaView style={styles.root}>
       {/* <WelcomeScreen></WelcomeScreen> */}
-      <SignInScreen></SignInScreen>
-      {/* <RegistrationScreen/> */}
+      {/* <SignInScreen></SignInScreen> */}
+      <RegistrationScreen/>
     </SafeAreaView>
   );
 };

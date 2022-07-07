@@ -8,15 +8,28 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import Logo from '../../../assets/images/Logo_HQ.png';
-
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
+import SocialSignInButtons from '../../components/SocialSignInButtons';
 
 const SignInScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const {height} = useWindowDimensions();
+
+  const onSignIn = () => {
+    console.warn('sign in');
+  };
+
+  const onForgotPassword = () => {
+    console.warn('forgot password');
+  };
+
+  const onNoAccount = () => {
+    console.warn('No account');
+  };
+
   return (
     <ScrollView>
       <View style={styles.root}>
@@ -37,29 +50,22 @@ const SignInScreen = () => {
           setValue={setPassword}
           secureTextEntry
         />
-        <CustomButton text="Sign In" />
+        <CustomButton text="Sign In" onPress={onSignIn} />
         <CustomButton
           text="Forgot Password?"
           bgColor="white"
           textColor="gray"
+          onPress={onForgotPassword}
         />
-        <View style={styles.socialBtns}>
-          <CustomButton
-            text="Sign in with Google"
-            bgColor="#FAE9EA"
-            textColor="#DD4D44"
-          />
-          <CustomButton
-            text="Sign in with FaceBook"
-            bgColor="#E7EAF4"
-            textColor="#4765A9"
-          />
-          <CustomButton
-            text="Sign in with Apple"
-            bgColor="#E3E3E3"
-            textColor="#363636"
-          />
-        </View>
+
+        <SocialSignInButtons />
+
+        <CustomButton
+          text="Don't have an account? Click here to register"
+          bgColor="white"
+          textColor="gray"
+          onPress={onNoAccount}
+        />
       </View>
     </ScrollView>
   );
@@ -80,8 +86,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 50,
   },
-  signInBtn: {},
-  socialBtns: {marginTop: 50},
 });
 
 export default SignInScreen;
