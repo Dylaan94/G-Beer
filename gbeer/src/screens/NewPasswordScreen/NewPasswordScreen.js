@@ -12,11 +12,13 @@ import Logo from '../../../assets/images/Logo_HQ.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
-const ResetPasswordScreen = () => {
-  const [email, setEmail] = useState('');
+const NewPasswordScreen = () => {
+  const [code, setCode] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const onSignInPressed = () => {
-    console.warn('sign in ');
+  const onSubmitPressed = () => {
+    console.warn('submitted ');
   };
 
   const onSendPressed = () => {
@@ -32,24 +34,30 @@ const ResetPasswordScreen = () => {
           style={[styles.logo, {height: height * 0.15}]}
           resizeMode="contain"
         />
-        <Text style={styles.title}> Reset Password </Text>
+        <Text style={styles.title}> New Password </Text>
 
-        <Text style={styles.text}>
-          Please input the email associated with your account and we will send a
-          new confirmation code to your inbox
-        </Text>
+        <CustomInput
+          placeholder="Confirmation Code"
+          value={code}
+          setValue={setCode}
+        />
 
-        <CustomInput placeholder="Email" value={email} setValue={setEmail} />
+        <CustomInput
+          placeholder="New Password"
+          value={password}
+          setValue={setPassword}
+          secureTextEntry
+        />
+        <CustomInput
+          placeholder="Confirm New Password"
+          value={confirmPassword}
+          setValue={setConfirmPassword}
+          secureTextEntry
+        />
 
-        <View style={styles.sendBtn}>
-          <CustomButton onPress={onSendPressed} text="Send" />
+        <View style={styles.submitBtn}>
+          <CustomButton onPress={onSubmitPressed} text="Submit" />
         </View>
-
-        <Text style={styles.text}>
-          <Text onPress={onSignInPressed} style={styles.signInLink}>
-            Back to Sign In
-          </Text>
-        </Text>
       </View>
     </ScrollView>
   );
@@ -83,9 +91,9 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     fontWeight: 'bold',
   },
-  sendBtn: {
+  submitBtn: {
     marginTop: 10,
   },
 });
 
-export default ResetPasswordScreen;
+export default NewPasswordScreen;
