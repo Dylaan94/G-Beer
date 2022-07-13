@@ -10,7 +10,6 @@ import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 
 import Navigation from '../gbeerapp/src/navigation';
-import WelcomeScreen from '../gbeerapp/src/screens/WelcomeScreen'
 
 const App = () => {
   return (

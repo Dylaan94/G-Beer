@@ -7,12 +7,24 @@ import {
   useWindowDimensions,
   ScrollView,
 } from 'react-native';
-import Logo from '../../../assets/images/Logo_HQ.png';
 
+import Logo from '../../../assets/images/Logo_HQ.png';
 import RegisterSignIn from '../../components/RegisterSignIn';
+
+import {useNavigation} from '@react-navigation/native';
 
 const WelcomeScreen = () => {
   const {height} = useWindowDimensions();
+  const navigation = useNavigation();
+
+  const onPressRegister = () => {
+    navigation.navigate('RegistrationScreen')
+  };
+
+  const onPressSignIn = () => {
+    navigation.navigate('SignInScreen')
+  };
+
   return (
     <ScrollView>
       <View style={styles.root}>
@@ -22,7 +34,9 @@ const WelcomeScreen = () => {
           resizeMode="contain"
         />
         <Text style={styles.welcomeText}>Welcome to G Beer</Text>
-        <RegisterSignIn></RegisterSignIn>
+        <RegisterSignIn
+          onPressRegister={onPressRegister}
+          onPressSignIn={onPressSignIn}></RegisterSignIn>
       </View>
     </ScrollView>
   );

@@ -12,15 +12,19 @@ import Logo from '../../../assets/images/Logo_HQ.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
+import {useNavigation} from '@react-navigation/native'
+
 const ResetPasswordScreen = () => {
   const [email, setEmail] = useState('');
 
+  const navigation = useNavigation();
+
   const onSignInPressed = () => {
-    console.warn('sign in ');
+    navigation.navigate('SignInScreen')
   };
 
   const onSendPressed = () => {
-    console.warn('send');
+    navigation.navigate('NewPasswordScreen')
   };
 
   const {height} = useWindowDimensions();

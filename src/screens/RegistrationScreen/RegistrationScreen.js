@@ -12,6 +12,10 @@ import Logo from '../../../assets/images/Logo_HQ.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
+import {useNavigation} from '@react-navigation/native';
+
+
+
 const RegistrationScreen = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -20,12 +24,14 @@ const RegistrationScreen = () => {
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
 
+  const navigation = useNavigation();
+
   const onSignUpPressed = () => {
-    console.warn('Sign up');
+    navigation.navigate('ConfirmSignUpScreen')
   };
 
   const onSignInPressed = () => {
-    console.warn('sign in ');
+    navigation.navigate('SignInScreen')
   };
 
   const onTermsOfUsePressed = () => {

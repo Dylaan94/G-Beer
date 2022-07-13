@@ -12,17 +12,21 @@ import Logo from '../../../assets/images/Logo_HQ.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
+import {useNavigation} from '@react-navigation/native'
+
 const NewPasswordScreen = () => {
   const [code, setCode] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const navigation = useNavigation();
+
   const onSubmitPressed = () => {
-    console.warn('submitted ');
+    navigation.navigate('SignInScreen');
   };
 
   const onSignInPressed = () => {
-    console.warn('back to sign in');
+    navigation.navigate('SignInScreen');
   };
 
   const {height} = useWindowDimensions();

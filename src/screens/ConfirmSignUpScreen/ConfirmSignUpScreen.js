@@ -12,11 +12,15 @@ import Logo from '../../../assets/images/Logo_HQ.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
+import {useNavigation} from '@react-navigation/native'
+
 const ConfirmSignUpScreen = () => {
+const navigation = useNavigation();
+
   const [code, setCode] = useState('');
 
   const onSignInPressed = () => {
-    console.warn('sign in ');
+    navigation.navigate('SignInScreen');
   };
 
   const onResendCodePressed = () => {
@@ -24,7 +28,7 @@ const ConfirmSignUpScreen = () => {
   };
 
   const onConfirmPressed = () => {
-    console.warn('confirm');
+    navigation.navigate('HomeScreen')
   };
 
   const {height} = useWindowDimensions();

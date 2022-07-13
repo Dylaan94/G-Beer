@@ -12,22 +12,25 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 
+import {useNavigation} from '@react-navigation/native' 
+
 const SignInScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const {height} = useWindowDimensions();
+  const { height } = useWindowDimensions();
+  const navigation = useNavigation();
 
   const onSignIn = () => {
-    console.warn('sign in');
+    navigation.navigate('HomeScreen')
   };
 
   const onForgotPassword = () => {
-    console.warn('forgot password');
+    navigation.navigate('ResetPasswordScreen')
   };
 
   const onNoAccount = () => {
-    console.warn('No account');
+    navigation.navigate('RegistrationScreen')
   };
 
   return (

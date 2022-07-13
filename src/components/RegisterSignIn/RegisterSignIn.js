@@ -1,14 +1,17 @@
 import React from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
 
-const RegisterSignIn = () => {
+const RegisterSignIn = ({onPressRegister, onPressSignIn}) => {
   return (
     <View style={styles.root}>
-      <Pressable style={styles.register} title="Register">
+      <Pressable
+        onPress={onPressRegister}
+        style={styles.register}
+        title="Register">
         <Text style={styles.registerText}> Register </Text>
       </Pressable>
 
-      <Pressable style={styles.signIn} title="Sign In">
+      <Pressable onPress={onPressSignIn} style={styles.signIn} title="Sign In">
         <Text style={styles.signInText}>Sign In</Text>
       </Pressable>
     </View>
