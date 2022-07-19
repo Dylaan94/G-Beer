@@ -47,11 +47,25 @@ const SignInScreen = () => {
         <CustomInput
           name={'username'}
           control={control}
+          rules={{
+            required: 'Username is required',
+            minLength: {
+              value: 5,
+              message: 'Username must be at least 5 characters long',
+            },
+          }}
           placeholder="Username"
         />
         <CustomInput
           name={'password'}
           control={control}
+          rules={{
+            required: 'Password is required',
+            minLength: {
+              value: 7,
+              message: 'Password must be at least 7 characters long',
+            },
+          }}
           placeholder="Password"
           secureTextEntry
         />
