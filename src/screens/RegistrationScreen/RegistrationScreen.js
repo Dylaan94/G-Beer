@@ -17,6 +17,10 @@ import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 
 const RegistrationScreen = () => {
+  const EMAIL_REGEX = new RegExp(
+    "([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])",
+  );
+
   const {control, handleSubmit} = useForm();
 
   const navigation = useNavigation();
@@ -51,33 +55,52 @@ const RegistrationScreen = () => {
         <CustomInput
           name={'username'}
           control={control}
+          rules={{
+            required: 'Username is required',
+            minLength: {
+              value: 5,
+              message: 'Username must be at least 5 characters',
+            },
+            maxLength: {
+              value: 10,
+              message: 'Username must not be longer than 10 characters',
+            },
+          }}
           placeholder="Username"
         />
-        <CustomInput name={'email'} control={control} placeholder="Email" />
-        <View style={styles.nameRoot}>
-          <CustomInput
-            name={'firstName'}
-            control={control}
-            placeholder="First Name"
-            type="HALF"
-          />
-          <CustomInput
-            name={'lastName'}
-            control={control}
-            placeholder="Last Name"
-            type="HALF"
-          />
-        </View>
+        <CustomInput
+          name={'email'}
+          control={control}
+          rules={{
+            required: 'Email is required',
+            pattern: {value: EMAIL_REGEX, message: 'Invalid email address'},
+          }}
+          placeholder="Email"
+        />
 
         <CustomInput
           name={'password'}
           control={control}
+          rules={{
+            required: 'Password is required',
+            minLength: {
+              value: 7,
+              message: 'Password must be at least 7 characters long',
+            },
+          }}
           placeholder="Password"
           secureTextEntry
         />
         <CustomInput
           name={'confirmPassword'}
           control={control}
+          rules={{
+            required: 'Password confirmation is required',
+            minLength: {
+              value: 7,
+              message: 'Password must be at least 7 characters long',
+            },
+          }}
           placeholder="Confirm Password"
           secureTextEntry
         />
