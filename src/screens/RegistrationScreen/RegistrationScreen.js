@@ -14,24 +14,20 @@ import CustomButton from '../../components/CustomButton';
 
 import {useNavigation} from '@react-navigation/native';
 
-
+import {useForm} from 'react-hook-form';
 
 const RegistrationScreen = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordRepeat, setPasswordRepeat] = useState('');
+  const {control, handleSubmit} = useForm();
 
   const navigation = useNavigation();
 
-  const onSignUpPressed = () => {
-    navigation.navigate('ConfirmSignUpScreen')
+  const onSignUpPressed = data => {
+    console.log(data);
+    navigation.navigate('ConfirmSignUpScreen');
   };
 
   const onSignInPressed = () => {
-    navigation.navigate('SignInScreen')
+    navigation.navigate('SignInScreen');
   };
 
   const onTermsOfUsePressed = () => {
@@ -53,36 +49,36 @@ const RegistrationScreen = () => {
         />
         <Text style={styles.title}> Register for G Beer</Text>
         <CustomInput
+          name={'username'}
+          control={control}
           placeholder="Username"
-          value={username}
-          setValue={setUsername}
         />
-        <CustomInput placeholder="Email" value={email} setValue={setEmail} />
+        <CustomInput name={'email'} control={control} placeholder="Email" />
         <View style={styles.nameRoot}>
           <CustomInput
+            name={'firstName'}
+            control={control}
             placeholder="First Name"
-            value={firstName}
-            setValue={setFirstName}
             type="HALF"
           />
           <CustomInput
+            name={'lastName'}
+            control={control}
             placeholder="Last Name"
-            value={lastName}
-            setValue={setLastName}
             type="HALF"
           />
         </View>
 
         <CustomInput
+          name={'password'}
+          control={control}
           placeholder="Password"
-          value={password}
-          setValue={setPassword}
           secureTextEntry
         />
         <CustomInput
+          name={'confirmPassword'}
+          control={control}
           placeholder="Confirm Password"
-          value={passwordRepeat}
-          setValue={setPasswordRepeat}
           secureTextEntry
         />
 
@@ -99,7 +95,10 @@ const RegistrationScreen = () => {
         </Text>
 
         <View style={styles.signUpBtn}>
-          <CustomButton text="Sign Up" onPress={onSignUpPressed} />
+          <CustomButton
+            text="Sign Up"
+            onPress={handleSubmit(onSignUpPressed)}
+          />
         </View>
 
         <Text style={styles.text}>

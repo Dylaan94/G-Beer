@@ -12,19 +12,20 @@ import Logo from '../../../assets/images/Logo_HQ.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
-import {useNavigation} from '@react-navigation/native'
+import {useNavigation} from '@react-navigation/native';
+import {useForm, Controller} from 'react-hook-form';
 
 const ResetPasswordScreen = () => {
-  const [email, setEmail] = useState('');
-
   const navigation = useNavigation();
+  const {control, handleSubmit} = useForm();
 
   const onSignInPressed = () => {
-    navigation.navigate('SignInScreen')
+    navigation.navigate('SignInScreen');
   };
 
-  const onSendPressed = () => {
-    navigation.navigate('NewPasswordScreen')
+  const onSendPressed = data => {
+    console.log(data);
+    navigation.navigate('NewPasswordScreen');
   };
 
   const {height} = useWindowDimensions();
@@ -43,10 +44,10 @@ const ResetPasswordScreen = () => {
           new confirmation code to your inbox
         </Text>
 
-        <CustomInput placeholder="Email" value={email} setValue={setEmail} />
+        <CustomInput name={'email'} control={control} placeholder="Email" />
 
         <View style={styles.sendBtn}>
-          <CustomButton onPress={onSendPressed} text="Send" />
+          <CustomButton onPress={handleSubmit(onSendPressed)} text="Send" />
         </View>
 
         <Text style={styles.text}>

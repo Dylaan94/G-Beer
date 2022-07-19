@@ -12,16 +12,16 @@ import Logo from '../../../assets/images/Logo_HQ.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
-import {useNavigation} from '@react-navigation/native'
+import {useNavigation} from '@react-navigation/native';
+
+import {useForm} from 'react-hook-form';
 
 const NewPasswordScreen = () => {
-  const [code, setCode] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
   const navigation = useNavigation();
+  const {control, handleSubmit} = useForm();
 
-  const onSubmitPressed = () => {
+  const onSubmitPressed = data => {
+    console.log(data);
     navigation.navigate('SignInScreen');
   };
 
@@ -41,26 +41,26 @@ const NewPasswordScreen = () => {
         <Text style={styles.title}> New Password </Text>
 
         <CustomInput
+          name={'confirmationCode'}
+          control={control}
           placeholder="Confirmation Code"
-          value={code}
-          setValue={setCode}
         />
 
         <CustomInput
+          name={'newPassword'}
+          control={control}
           placeholder="New Password"
-          value={password}
-          setValue={setPassword}
           secureTextEntry
         />
         <CustomInput
+          name={'confirmNewPassword'}
+          control={control}
           placeholder="Confirm New Password"
-          value={confirmPassword}
-          setValue={setConfirmPassword}
           secureTextEntry
         />
 
         <View style={styles.submitBtn}>
-          <CustomButton onPress={onSubmitPressed} text="Submit" />
+          <CustomButton onPress={handleSubmit(onSubmitPressed)} text="Submit" />
         </View>
 
         <Text style={styles.text}>

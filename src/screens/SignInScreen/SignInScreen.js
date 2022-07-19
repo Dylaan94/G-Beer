@@ -12,25 +12,27 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 
-import {useNavigation} from '@react-navigation/native' 
+import {useNavigation} from '@react-navigation/native';
+
+import {useForm} from 'react-hook-form';
 
 const SignInScreen = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-  const { height } = useWindowDimensions();
+  const {height} = useWindowDimensions();
   const navigation = useNavigation();
 
-  const onSignIn = () => {
-    navigation.navigate('HomeScreen')
+  const {control, handleSubmit} = useForm();
+
+  const onSignInPressed = data => {
+    console.log(data);
+    navigation.navigate('HomeScreen');
   };
 
   const onForgotPassword = () => {
-    navigation.navigate('ResetPasswordScreen')
+    navigation.navigate('ResetPasswordScreen');
   };
 
   const onNoAccount = () => {
-    navigation.navigate('RegistrationScreen')
+    navigation.navigate('RegistrationScreen');
   };
 
   return (
@@ -43,17 +45,17 @@ const SignInScreen = () => {
         />
         <Text style={styles.text}>Welcome back!</Text>
         <CustomInput
+          name={'username'}
+          control={control}
           placeholder="Username"
-          value={username}
-          setValue={setUsername}
         />
         <CustomInput
+          name={'password'}
+          control={control}
           placeholder="Password"
-          value={password}
-          setValue={setPassword}
           secureTextEntry
         />
-        <CustomButton text="Sign In" onPress={onSignIn} />
+        <CustomButton text="Sign In" onPress={handleSubmit(onSignInPressed)} />
         <CustomButton
           text="Forgot Password?"
           bgColor="white"

@@ -12,12 +12,13 @@ import Logo from '../../../assets/images/Logo_HQ.png';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
-import {useNavigation} from '@react-navigation/native'
+import {useNavigation} from '@react-navigation/native';
+
+import {useForm} from 'react-hook-form';
 
 const ConfirmSignUpScreen = () => {
-const navigation = useNavigation();
-
-  const [code, setCode] = useState('');
+  const navigation = useNavigation();
+  const {control, handleSubmit} = useForm();
 
   const onSignInPressed = () => {
     navigation.navigate('SignInScreen');
@@ -27,8 +28,9 @@ const navigation = useNavigation();
     console.warn('resend code');
   };
 
-  const onConfirmPressed = () => {
-    navigation.navigate('HomeScreen')
+  const onConfirmPressed = data => {
+    console.log(data);
+    navigation.navigate('HomeScreen');
   };
 
   const {height} = useWindowDimensions();
@@ -43,13 +45,16 @@ const navigation = useNavigation();
         <Text style={styles.title}> Confirm Sign Up</Text>
 
         <CustomInput
+          name={'confirmationCode'}
+          control={control}
           placeholder="Confirmation Code"
-          value={code}
-          setValue={setCode}
         />
 
         <View style={styles.confirmBtn}>
-          <CustomButton onPress={onConfirmPressed} text="Confirm" />
+          <CustomButton
+            onPress={handleSubmit(onConfirmPressed)}
+            text="Confirm"
+          />
         </View>
 
         <Text style={styles.text}>
