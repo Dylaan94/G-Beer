@@ -6,31 +6,50 @@ import {
   StyleSheet,
   useWindowDimensions,
   ScrollView,
+  Alert,
 } from 'react-native';
 import Logo from '../../../assets/images/Logo_HQ.png';
 
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 import {useForm} from 'react-hook-form';
+import {Auth} from 'aws-amplify';
+import Navigation from '../../navigation';
 
 const ConfirmSignUpScreen = () => {
+  const route = useRoute();
+  // takes username from previous page
+  const username = route?.params?.username;
+
   const navigation = useNavigation();
   const {control, handleSubmit} = useForm();
 
+  const onConfirmPressed = async data => {
+    try {
+      const response = await Auth.confirmSignUp(
+        username,
+        data.confirmationCode,
+      );
+      console.log(response);
+    } catch (e) {
+      Alert.alert('Oops!', e.message);
+    }
+  };
+
+  const onResendCodePressed = async () => {
+    try {
+      await Auth.resendSignUp(username);
+      Alert.alert("Code resent", "Please check your email")
+    } catch (e) {
+      Alert.alert('Oops!', e.message);
+    }
+  };
+
   const onSignInPressed = () => {
     navigation.navigate('SignInScreen');
-  };
-
-  const onResendCodePressed = () => {
-    console.warn('resend code');
-  };
-
-  const onConfirmPressed = data => {
-    console.log(data);
-    navigation.navigate('HomeScreen');
   };
 
   const {height} = useWindowDimensions();

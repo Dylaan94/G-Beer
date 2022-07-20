@@ -8,8 +8,11 @@
 
 import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-
 import Navigation from '../gbeerapp/src/navigation';
+import { Amplify } from 'aws-amplify';
+import config from '../gbeerapp/src/aws-exports';
+
+Amplify.configure(config);
 
 const App = () => {
   return (

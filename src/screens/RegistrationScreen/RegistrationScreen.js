@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Image,
+  Alert,
   StyleSheet,
   useWindowDimensions,
   ScrollView,
@@ -15,6 +16,7 @@ import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 
 import {useForm} from 'react-hook-form';
+import {Auth} from 'aws-amplify';
 
 const RegistrationScreen = () => {
   const EMAIL_REGEX = new RegExp(
@@ -26,9 +28,22 @@ const RegistrationScreen = () => {
 
   const password = watch('password');
 
-  const onSignUpPressed = data => {
-    console.log(data);
-    navigation.navigate('ConfirmSignUpScreen');
+  const onSignUpPressed = async data => {
+    const {username, password, email} = data;
+
+    try {
+      await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email,
+        },
+      });
+      // moves to confirmation screen and sends username so user does not have to input again
+      navigation.navigate('ConfirmSignUpScreen', {username})
+    } catch (e) {
+      Alert.alert('Oops!', e.message)
+    }
   };
 
   const onSignInPressed = () => {
@@ -85,8 +100,8 @@ const RegistrationScreen = () => {
           rules={{
             required: 'Password is required',
             minLength: {
-              value: 7,
-              message: 'Password must be at least 7 characters long',
+              value: 8,
+              message: 'Password must be at least 8 characters long',
             },
           }}
           placeholder="Password"

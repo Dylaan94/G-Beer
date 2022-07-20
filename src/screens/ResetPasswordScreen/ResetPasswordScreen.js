@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Image,
+  Alert,
   StyleSheet,
   useWindowDimensions,
   ScrollView,
@@ -14,18 +15,24 @@ import CustomButton from '../../components/CustomButton';
 
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
+import {Auth} from 'aws-amplify';
 
 const ResetPasswordScreen = () => {
   const navigation = useNavigation();
   const {control, handleSubmit} = useForm();
 
-  const onSignInPressed = () => {
-    navigation.navigate('SignInScreen');
+  const onSendPressed = async (data) => {
+    const username = data.username
+    try {
+      await Auth.forgotPassword(data.username);
+      navigation.navigate('NewPasswordScreen', {username});
+    } catch (e) {
+      Alert.alert('Oops!', e.message);
+    }
   };
 
-  const onSendPressed = data => {
-    console.log(data);
-    navigation.navigate('NewPasswordScreen');
+  const onSignInPressed = () => {
+    navigation.navigate('SignInScreen');
   };
 
   const {height} = useWindowDimensions();
@@ -40,11 +47,15 @@ const ResetPasswordScreen = () => {
         <Text style={styles.title}> Reset Password </Text>
 
         <Text style={styles.text}>
-          Please input the email associated with your account and we will send a
-          new confirmation code to your inbox
+          Please input the username associated with your account and we will
+          send a new confirmation code to your inbox
         </Text>
 
-        <CustomInput name={'email'} control={control} placeholder="Email" />
+        <CustomInput
+          name={'username'}
+          control={control}
+          placeholder="Username"
+        />
 
         <View style={styles.sendBtn}>
           <CustomButton onPress={handleSubmit(onSendPressed)} text="Send" />

@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Image,
+  Alert,
   ScrollView,
   StyleSheet,
   useWindowDimensions,
@@ -15,16 +16,29 @@ import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/native';
 
 import {useForm} from 'react-hook-form';
+import {Auth} from 'aws-amplify';
 
 const SignInScreen = () => {
   const {height} = useWindowDimensions();
   const navigation = useNavigation();
-
   const {control, handleSubmit} = useForm();
 
-  const onSignInPressed = data => {
-    console.log(data);
-    navigation.navigate('HomeScreen');
+  const [loading, setLoading] = useState();
+
+  const onSignInPressed = async data => {
+    // prevents pending request errors
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    try {
+      const response = await Auth.signIn(data.username, data.password);
+      console.log(response);
+    } catch (e) {
+      Alert.alert('Oops!', e.message);
+    }
+    // sets loading back to false so that Sign in can be pressed again
+    setLoading(false);
   };
 
   const onForgotPassword = () => {
@@ -62,14 +76,18 @@ const SignInScreen = () => {
           rules={{
             required: 'Password is required',
             minLength: {
-              value: 7,
-              message: 'Password must be at least 7 characters long',
+              value: 8,
+              message: 'Password must be at least 8 characters long',
             },
           }}
           placeholder="Password"
           secureTextEntry
         />
-        <CustomButton text="Sign In" onPress={handleSubmit(onSignInPressed)} />
+        {/* Conditionally loads text on custom button */}
+        <CustomButton
+          text={loading ? 'Logging in...' : 'Sign In'}
+          onPress={handleSubmit(onSignInPressed)}
+        />
         <CustomButton
           text="Forgot Password?"
           bgColor="white"
