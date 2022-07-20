@@ -21,9 +21,10 @@ const RegistrationScreen = () => {
     "([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])",
   );
 
-  const {control, handleSubmit} = useForm();
-
+  const {control, handleSubmit, watch} = useForm();
   const navigation = useNavigation();
+
+  const password = watch('password');
 
   const onSignUpPressed = data => {
     console.log(data);
@@ -95,11 +96,8 @@ const RegistrationScreen = () => {
           name={'confirmPassword'}
           control={control}
           rules={{
-            required: 'Password confirmation is required',
-            minLength: {
-              value: 7,
-              message: 'Password must be at least 7 characters long',
-            },
+            validate: value =>
+              value === password ? true : 'Passwords do not match',
           }}
           placeholder="Confirm Password"
           secureTextEntry

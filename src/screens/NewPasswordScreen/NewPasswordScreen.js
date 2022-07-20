@@ -18,7 +18,9 @@ import {useForm} from 'react-hook-form';
 
 const NewPasswordScreen = () => {
   const navigation = useNavigation();
-  const {control, handleSubmit} = useForm();
+  const {control, handleSubmit, watch} = useForm();
+
+  const password = watch('password');
 
   const onSubmitPressed = data => {
     console.log(data);
@@ -49,12 +51,23 @@ const NewPasswordScreen = () => {
         <CustomInput
           name={'newPassword'}
           control={control}
+          rules={{
+            required: 'Password is required',
+            minLength: {
+              value: 7,
+              message: 'Password must be at least 7 characters',
+            },
+          }}
           placeholder="New Password"
           secureTextEntry
         />
         <CustomInput
           name={'confirmNewPassword'}
           control={control}
+          rules={{
+            validate: value =>
+              value === password ? true : 'Passwords do not match',
+          }}
           placeholder="Confirm New Password"
           secureTextEntry
         />
