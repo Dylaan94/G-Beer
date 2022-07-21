@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {
   View,
+  SafeAreaView,
   Text,
   Image,
   Alert,
@@ -50,61 +51,63 @@ const SignInScreen = () => {
   };
 
   return (
-    <ScrollView>
-      <View style={styles.root}>
-        <Image
-          source={Logo}
-          style={[styles.logo, {height: height * 0.15}]}
-          resizeMode="contain"
-        />
-        <Text style={styles.text}>Welcome back!</Text>
-        <CustomInput
-          name={'username'}
-          control={control}
-          rules={{
-            required: 'Username is required',
-            minLength: {
-              value: 5,
-              message: 'Username must be at least 5 characters long',
-            },
-          }}
-          placeholder="Username"
-        />
-        <CustomInput
-          name={'password'}
-          control={control}
-          rules={{
-            required: 'Password is required',
-            minLength: {
-              value: 8,
-              message: 'Password must be at least 8 characters long',
-            },
-          }}
-          placeholder="Password"
-          secureTextEntry
-        />
-        {/* Conditionally loads text on custom button */}
-        <CustomButton
-          text={loading ? 'Logging in...' : 'Sign In'}
-          onPress={handleSubmit(onSignInPressed)}
-        />
-        <CustomButton
-          text="Forgot Password?"
-          bgColor="white"
-          textColor="gray"
-          onPress={onForgotPassword}
-        />
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.root}>
+          <Image
+            source={Logo}
+            style={[styles.logo, {height: height * 0.15}]}
+            resizeMode="contain"
+          />
+          <Text style={styles.text}>Welcome back!</Text>
+          <CustomInput
+            name={'username'}
+            control={control}
+            rules={{
+              required: 'Username is required',
+              minLength: {
+                value: 5,
+                message: 'Username must be at least 5 characters long',
+              },
+            }}
+            placeholder="Username"
+          />
+          <CustomInput
+            name={'password'}
+            control={control}
+            rules={{
+              required: 'Password is required',
+              minLength: {
+                value: 8,
+                message: 'Password must be at least 8 characters long',
+              },
+            }}
+            placeholder="Password"
+            secureTextEntry
+          />
+          {/* Conditionally loads text on custom button */}
+          <CustomButton
+            text={loading ? 'Logging in...' : 'Sign In'}
+            onPress={handleSubmit(onSignInPressed)}
+          />
+          <CustomButton
+            text="Forgot Password?"
+            bgColor="white"
+            textColor="gray"
+            onPress={onForgotPassword}
+          />
 
-        <SocialSignInButtons />
+          <SocialSignInButtons />
 
-        <CustomButton
-          text="Don't have an account? Click here to register"
-          bgColor="white"
-          textColor="gray"
-          onPress={onNoAccount}
-        />
-      </View>
-    </ScrollView>
+          <CustomButton
+            text="Don't have an account? Click here to register"
+            bgColor="white"
+            textColor="gray"
+            onPress={onNoAccount}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

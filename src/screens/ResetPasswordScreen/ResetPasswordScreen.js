@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {
   View,
+  SafeAreaView,
   Text,
   Image,
   Alert,
@@ -21,8 +22,8 @@ const ResetPasswordScreen = () => {
   const navigation = useNavigation();
   const {control, handleSubmit} = useForm();
 
-  const onSendPressed = async (data) => {
-    const username = data.username
+  const onSendPressed = async data => {
+    const username = data.username;
     try {
       await Auth.forgotPassword(data.username);
       navigation.navigate('NewPasswordScreen', {username});
@@ -37,37 +38,39 @@ const ResetPasswordScreen = () => {
 
   const {height} = useWindowDimensions();
   return (
-    <ScrollView>
-      <View style={styles.root}>
-        <Image
-          source={Logo}
-          style={[styles.logo, {height: height * 0.15}]}
-          resizeMode="contain"
-        />
-        <Text style={styles.title}> Reset Password </Text>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.root}>
+          <Image
+            source={Logo}
+            style={[styles.logo, {height: height * 0.15}]}
+            resizeMode="contain"
+          />
+          <Text style={styles.title}> Reset Password </Text>
 
-        <Text style={styles.text}>
-          Please input the username associated with your account and we will
-          send a new confirmation code to your inbox
-        </Text>
-
-        <CustomInput
-          name={'username'}
-          control={control}
-          placeholder="Username"
-        />
-
-        <View style={styles.sendBtn}>
-          <CustomButton onPress={handleSubmit(onSendPressed)} text="Send" />
-        </View>
-
-        <Text style={styles.text}>
-          <Text onPress={onSignInPressed} style={styles.signInLink}>
-            Back to Sign In
+          <Text style={styles.text}>
+            Please input the username associated with your account and we will
+            send a new confirmation code to your inbox
           </Text>
-        </Text>
-      </View>
-    </ScrollView>
+
+          <CustomInput
+            name={'username'}
+            control={control}
+            placeholder="Username"
+          />
+
+          <View style={styles.sendBtn}>
+            <CustomButton onPress={handleSubmit(onSendPressed)} text="Send" />
+          </View>
+
+          <Text style={styles.text}>
+            <Text onPress={onSignInPressed} style={styles.signInLink}>
+              Back to Sign In
+            </Text>
+          </Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

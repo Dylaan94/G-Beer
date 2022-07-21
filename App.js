@@ -7,18 +7,18 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import Navigation from '../gbeerapp/src/navigation';
-import { Amplify } from 'aws-amplify';
+import {Amplify} from 'aws-amplify';
 import config from '../gbeerapp/src/aws-exports';
 
 Amplify.configure(config);
 
 const App = () => {
   return (
-    <SafeAreaView style={styles.root}>
+    <View style={styles.root}>
       <Navigation />
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {
   View,
+  SafeAreaView,
   Text,
   Image,
   Alert,
@@ -40,9 +41,9 @@ const RegistrationScreen = () => {
         },
       });
       // moves to confirmation screen and sends username so user does not have to input again
-      navigation.navigate('ConfirmSignUpScreen', {username})
+      navigation.navigate('ConfirmSignUpScreen', {username});
     } catch (e) {
-      Alert.alert('Oops!', e.message)
+      Alert.alert('Oops!', e.message);
     }
   };
 
@@ -60,91 +61,93 @@ const RegistrationScreen = () => {
 
   const {height} = useWindowDimensions();
   return (
-    <ScrollView>
-      <View style={styles.root}>
-        <Image
-          source={Logo}
-          style={[styles.logo, {height: height * 0.15}]}
-          resizeMode="contain"
-        />
-        <Text style={styles.title}> Register for G Beer</Text>
-        <CustomInput
-          name={'username'}
-          control={control}
-          rules={{
-            required: 'Username is required',
-            minLength: {
-              value: 5,
-              message: 'Username must be at least 5 characters',
-            },
-            maxLength: {
-              value: 10,
-              message: 'Username must not be longer than 10 characters',
-            },
-          }}
-          placeholder="Username"
-        />
-        <CustomInput
-          name={'email'}
-          control={control}
-          rules={{
-            required: 'Email is required',
-            pattern: {value: EMAIL_REGEX, message: 'Invalid email address'},
-          }}
-          placeholder="Email"
-        />
-
-        <CustomInput
-          name={'password'}
-          control={control}
-          rules={{
-            required: 'Password is required',
-            minLength: {
-              value: 8,
-              message: 'Password must be at least 8 characters long',
-            },
-          }}
-          placeholder="Password"
-          secureTextEntry
-        />
-        <CustomInput
-          name={'confirmPassword'}
-          control={control}
-          rules={{
-            validate: value =>
-              value === password ? true : 'Passwords do not match',
-          }}
-          placeholder="Confirm Password"
-          secureTextEntry
-        />
-
-        <Text style={styles.text}>
-          By registering, you confirm that you accept our{' '}
-          <Text onPress={onTermsOfUsePressed} style={styles.textLink}>
-            Terms of Use
-          </Text>{' '}
-          and{' '}
-          <Text onPress={onPrivacyPolicyPressed} style={styles.textLink}>
-            Privacy Policy
-          </Text>
-          .
-        </Text>
-
-        <View style={styles.signUpBtn}>
-          <CustomButton
-            text="Sign Up"
-            onPress={handleSubmit(onSignUpPressed)}
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.root}>
+          <Image
+            source={Logo}
+            style={[styles.logo, {height: height * 0.15}]}
+            resizeMode="contain"
           />
-        </View>
+          <Text style={styles.title}> Register for G Beer</Text>
+          <CustomInput
+            name={'username'}
+            control={control}
+            rules={{
+              required: 'Username is required',
+              minLength: {
+                value: 5,
+                message: 'Username must be at least 5 characters',
+              },
+              maxLength: {
+                value: 10,
+                message: 'Username must not be longer than 10 characters',
+              },
+            }}
+            placeholder="Username"
+          />
+          <CustomInput
+            name={'email'}
+            control={control}
+            rules={{
+              required: 'Email is required',
+              pattern: {value: EMAIL_REGEX, message: 'Invalid email address'},
+            }}
+            placeholder="Email"
+          />
 
-        <Text style={styles.text}>
-          Already have an account?{' '}
-          <Text onPress={onSignInPressed} style={styles.signInLink}>
-            Sign in
+          <CustomInput
+            name={'password'}
+            control={control}
+            rules={{
+              required: 'Password is required',
+              minLength: {
+                value: 8,
+                message: 'Password must be at least 8 characters long',
+              },
+            }}
+            placeholder="Password"
+            secureTextEntry
+          />
+          <CustomInput
+            name={'confirmPassword'}
+            control={control}
+            rules={{
+              validate: value =>
+                value === password ? true : 'Passwords do not match',
+            }}
+            placeholder="Confirm Password"
+            secureTextEntry
+          />
+
+          <Text style={styles.text}>
+            By registering, you confirm that you accept our{' '}
+            <Text onPress={onTermsOfUsePressed} style={styles.textLink}>
+              Terms of Use
+            </Text>{' '}
+            and{' '}
+            <Text onPress={onPrivacyPolicyPressed} style={styles.textLink}>
+              Privacy Policy
+            </Text>
+            .
           </Text>
-        </Text>
-      </View>
-    </ScrollView>
+
+          <View style={styles.signUpBtn}>
+            <CustomButton
+              text="Sign Up"
+              onPress={handleSubmit(onSignUpPressed)}
+            />
+          </View>
+
+          <Text style={styles.text}>
+            Already have an account?{' '}
+            <Text onPress={onSignInPressed} style={styles.signInLink}>
+              Sign in
+            </Text>
+          </Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

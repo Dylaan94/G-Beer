@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   View,
+  SafeAreaView,
   Text,
   Image,
   StyleSheet,
@@ -27,7 +28,7 @@ const WelcomeScreen = () => {
 
   return (
     <ScrollView>
-      <View style={styles.root}>
+      <SafeAreaView style={styles.root}>
         <Image
           source={Logo}
           style={[styles.logo, {height: height * 0.5}]}
@@ -37,7 +38,7 @@ const WelcomeScreen = () => {
         <RegisterSignIn
           onPressRegister={onPressRegister}
           onPressSignIn={onPressSignIn}></RegisterSignIn>
-      </View>
+      </SafeAreaView>
     </ScrollView>
   );
 };

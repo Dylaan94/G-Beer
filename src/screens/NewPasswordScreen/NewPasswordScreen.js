@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {
   View,
+  SafeAreaView,
   Text,
   Image,
   StyleSheet,
@@ -44,56 +45,61 @@ const NewPasswordScreen = () => {
 
   const {height} = useWindowDimensions();
   return (
-    <ScrollView>
-      <View style={styles.root}>
-        <Image
-          source={Logo}
-          style={[styles.logo, {height: height * 0.15}]}
-          resizeMode="contain"
-        />
-        <Text style={styles.title}> New Password </Text>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.root}>
+          <Image
+            source={Logo}
+            style={[styles.logo, {height: height * 0.15}]}
+            resizeMode="contain"
+          />
+          <Text style={styles.title}> New Password </Text>
 
-        <CustomInput
-          name={'confirmationCode'}
-          control={control}
-          placeholder="Confirmation Code"
-        />
+          <CustomInput
+            name={'confirmationCode'}
+            control={control}
+            placeholder="Confirmation Code"
+          />
 
-        <CustomInput
-          name={'newPassword'}
-          control={control}
-          rules={{
-            required: 'Password is required',
-            minLength: {
-              value: 8,
-              message: 'Password must be at least 8 characters',
-            },
-          }}
-          placeholder="New Password"
-          secureTextEntry
-        />
-        <CustomInput
-          name={'confirmNewPassword'}
-          control={control}
-          rules={{
-            validate: value =>
-              value === password ? true : 'Passwords do not match',
-          }}
-          placeholder="Confirm New Password"
-          secureTextEntry
-        />
+          <CustomInput
+            name={'newPassword'}
+            control={control}
+            rules={{
+              required: 'Password is required',
+              minLength: {
+                value: 8,
+                message: 'Password must be at least 8 characters',
+              },
+            }}
+            placeholder="New Password"
+            secureTextEntry
+          />
+          <CustomInput
+            name={'confirmNewPassword'}
+            control={control}
+            rules={{
+              validate: value =>
+                value === password ? true : 'Passwords do not match',
+            }}
+            placeholder="Confirm New Password"
+            secureTextEntry
+          />
 
-        <View style={styles.submitBtn}>
-          <CustomButton onPress={handleSubmit(onSubmitPressed)} text="Submit" />
-        </View>
+          <View style={styles.submitBtn}>
+            <CustomButton
+              onPress={handleSubmit(onSubmitPressed)}
+              text="Submit"
+            />
+          </View>
 
-        <Text style={styles.text}>
-          <Text onPress={onSignInPressed} style={styles.signInLink}>
-            Back to Sign In
+          <Text style={styles.text}>
+            <Text onPress={onSignInPressed} style={styles.signInLink}>
+              Back to Sign In
+            </Text>
           </Text>
-        </Text>
-      </View>
-    </ScrollView>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
