@@ -13,7 +13,6 @@ const HomeScreen = () => {
     <>
       <Map></Map>
       <CustomButton text="sign out" onPress={onSignOut}></CustomButton>
-      <Text> This is the Home Screen!</Text>
     </>
   );
 };

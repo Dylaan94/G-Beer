@@ -3,19 +3,14 @@ import React from 'react';
 
 import {PROVIDER_GOOGLE, Marker, Callout} from 'react-native-maps';
 
-const CustomMapMarker = data => {
-  const onMarkerPressed = () => {
-    console.log('marker pressed');
-  };
-  const {
-    data: {latitude, longitude, title},
-  } = data;
+const CustomMapMarker = ({data, onMarkerPressed}) => {
+  const {latitude, longitude, name, key} = data;
+
   return (
     <Marker
       coordinate={{latitude: latitude, longitude: longitude}}
-      title={title}
-      onPress={onMarkerPressed}>
-    </Marker>
+      title={name}
+      onPress={() => onMarkerPressed(key)}></Marker>
   );
 };
 
