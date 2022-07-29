@@ -18,7 +18,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 
 import {useForm} from 'react-hook-form';
 import {Auth} from 'aws-amplify';
-import Navigation from '../../navigation';
+import Navigation from '../../authNavigation';
 
 const ConfirmSignUpScreen = () => {
   const route = useRoute();

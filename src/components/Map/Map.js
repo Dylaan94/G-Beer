@@ -1,12 +1,14 @@
 import {View, Text, StyleSheet, useWindowDimensions} from 'react-native';
 import React from 'react';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 import CustomMapMarker from '../CustomMapMarker';
 import BreweryPopupModal from '../BreweryPopupModal';
 
 const Map = () => {
   const {height} = useWindowDimensions();
+  const tabBarHeight = useBottomTabBarHeight();
 
   const testData = [
     {
@@ -39,7 +41,7 @@ const Map = () => {
           latitudeDelta: 0.005,
           longitudeDelta: 0.008,
         }}
-        style={[styles.map, {height: height * 0.9}]}
+        style={[styles.map, {height: height - tabBarHeight}]}
         customMapStyle={mapStyle}>
         <CustomMapMarker data={testData[0]} onMarkerPressed={onMarkerPressed} />
       </MapView>

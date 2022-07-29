@@ -1,22 +1,32 @@
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, useWindowDimensions} from 'react-native';
 import React from 'react';
 
 import testPhoto from '../../../assets/images/OnomichiBreweryTest.png';
 import CustomButton from '../CustomButton';
 
-const onEnterPressed = () => {
-  console.warn('Enter pressed');
-};
-
-const onDirectionsPressed = () => {
-  console.warn('Directions pressed');
-};
+import {useNavigation} from '@react-navigation/native';
+import {Auth} from 'aws-amplify';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 const BreweryPopupModal = ({data}) => {
+  const {height} = useWindowDimensions();
+  const tabBarHeight = useBottomTabBarHeight();
+  const navigation = useNavigation();
+
   const {name, key, imageSource} = data;
 
+  const onEnterPressed = () => {
+    navigation.navigate('WelcomeScreen');
+    console.warn('Enter pressed');
+  };
+
+  const onDirectionsPressed = () => {
+    console.warn('Directions pressed');
+    Auth.signOut();
+  };
+
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, {height: height - tabBarHeight}]}>
       <View style={styles.content}>
         <Image source={testPhoto} style={styles.image}></Image>
         <View style={styles.nameView}>
@@ -49,13 +59,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%',
     width: '100%',
     backgroundColor: 'rgba(0,0,0,0.6)',
   },
   content: {
     alignItems: 'center',
-    height: '70%',
+    height: '80%',
     width: '90%',
     backgroundColor: 'white',
     borderRadius: 15,
