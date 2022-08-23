@@ -4,10 +4,12 @@ import React from 'react';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
+// screen imports
 import OtherScreen from '../screens/OtherScreen';
 import HomeNavigation from '../homeNavigation';
 import ProfileScreen from '../screens/ProfileScreen';
 
+// icon imports
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faLocationDot} from '@fortawesome/free-solid-svg-icons/faLocationDot';
 import {faEllipsis} from '@fortawesome/free-solid-svg-icons/faEllipsis';
@@ -24,14 +26,14 @@ const MyTheme = {
 };
 
 const iconFunc = icon => {
-  return <FontAwesomeIcon icon={icon} />;
+  return <FontAwesomeIcon icon={icon} size={18} />;
 };
 
 const TabNavigation = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        screenOptions={{headerShown: false}}
+        screenOptions={{headerShown: false, tabBarLabelStyle: {fontSize: 12}}}
         initialRouteName="HomeNavigation">
         <Tab.Screen
           name="ProfileScreen"

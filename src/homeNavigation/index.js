@@ -6,6 +6,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import TabNavigation from '../tabNavigation';
 import HomeScreen from '../screens/HomeScreen';
+import BeerListScreen from '../screens/BeerListScreen';
 import OtherScreen from '../screens/OtherScreen';
 
 const Stack = createNativeStackNavigator();
@@ -16,6 +17,7 @@ const HomeNavigation = () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        <Stack.Screen name ="BeerListScreen" component={BeerListScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
