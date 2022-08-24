@@ -4,7 +4,7 @@ import React from 'react';
 import {useWindowDimensions} from 'react-native';
 
 // component imports
-import CustomButtonMini from '../CustomButtonMini';
+import CustomButtonMini from '../CustomBackButtonMini';
 
 const BreweryHeader = () => {
   const {width} = useWindowDimensions();
@@ -21,7 +21,12 @@ const BreweryHeader = () => {
 };
 
 const styles = StyleSheet.create({
-  header: {display: 'flex', flexDirection: 'row', alignItems: 'center'},
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
   button: {
     position: 'absolute',
     alignItems: 'center',

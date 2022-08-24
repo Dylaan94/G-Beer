@@ -16,8 +16,7 @@ const BreweryPopupModal = ({data}) => {
   const {name, key, imageSource} = data;
 
   const onEnterPressed = () => {
-    navigation.navigate('BeerListScreen');
-    console.warn('Enter pressed');
+    navigation.navigate('BreweryHomeScreen');
   };
 
   const onDirectionsPressed = () => {
