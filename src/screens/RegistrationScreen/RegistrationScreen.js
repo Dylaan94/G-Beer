@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import {
   View,
+  SafeAreaView,
   Text,
   Image,
+  Alert,
   StyleSheet,
   useWindowDimensions,
   ScrollView,
@@ -15,15 +17,34 @@ import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 
 import {useForm} from 'react-hook-form';
+import {Auth} from 'aws-amplify';
 
 const RegistrationScreen = () => {
-  const {control, handleSubmit} = useForm();
+  const EMAIL_REGEX = new RegExp(
+    "([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])",
+  );
 
+  const {control, handleSubmit, watch} = useForm();
   const navigation = useNavigation();
 
-  const onSignUpPressed = data => {
-    console.log(data);
-    navigation.navigate('ConfirmSignUpScreen');
+  const password = watch('password');
+
+  const onSignUpPressed = async data => {
+    const {username, password, email} = data;
+
+    try {
+      await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email,
+        },
+      });
+      // moves to confirmation screen and sends username so user does not have to input again
+      navigation.navigate('ConfirmSignUpScreen', {username});
+    } catch (e) {
+      Alert.alert('Oops!', e.message);
+    }
   };
 
   const onSignInPressed = () => {
@@ -40,75 +61,93 @@ const RegistrationScreen = () => {
 
   const {height} = useWindowDimensions();
   return (
-    <ScrollView>
-      <View style={styles.root}>
-        <Image
-          source={Logo}
-          style={[styles.logo, {height: height * 0.15}]}
-          resizeMode="contain"
-        />
-        <Text style={styles.title}> Register for G Beer</Text>
-        <CustomInput
-          name={'username'}
-          control={control}
-          placeholder="Username"
-        />
-        <CustomInput name={'email'} control={control} placeholder="Email" />
-        <View style={styles.nameRoot}>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.root}>
+          <Image
+            source={Logo}
+            style={[styles.logo, {height: height * 0.15}]}
+            resizeMode="contain"
+          />
+          <Text style={styles.title}> Register for G Beer</Text>
           <CustomInput
-            name={'firstName'}
+            name={'username'}
             control={control}
-            placeholder="First Name"
-            type="HALF"
+            rules={{
+              required: 'Username is required',
+              minLength: {
+                value: 5,
+                message: 'Username must be at least 5 characters',
+              },
+              maxLength: {
+                value: 10,
+                message: 'Username must not be longer than 10 characters',
+              },
+            }}
+            placeholder="Username"
           />
           <CustomInput
-            name={'lastName'}
+            name={'email'}
             control={control}
-            placeholder="Last Name"
-            type="HALF"
+            rules={{
+              required: 'Email is required',
+              pattern: {value: EMAIL_REGEX, message: 'Invalid email address'},
+            }}
+            placeholder="Email"
           />
-        </View>
 
-        <CustomInput
-          name={'password'}
-          control={control}
-          placeholder="Password"
-          secureTextEntry
-        />
-        <CustomInput
-          name={'confirmPassword'}
-          control={control}
-          placeholder="Confirm Password"
-          secureTextEntry
-        />
-
-        <Text style={styles.text}>
-          By registering, you confirm that you accept our{' '}
-          <Text onPress={onTermsOfUsePressed} style={styles.textLink}>
-            Terms of Use
-          </Text>{' '}
-          and{' '}
-          <Text onPress={onPrivacyPolicyPressed} style={styles.textLink}>
-            Privacy Policy
-          </Text>
-          .
-        </Text>
-
-        <View style={styles.signUpBtn}>
-          <CustomButton
-            text="Sign Up"
-            onPress={handleSubmit(onSignUpPressed)}
+          <CustomInput
+            name={'password'}
+            control={control}
+            rules={{
+              required: 'Password is required',
+              minLength: {
+                value: 8,
+                message: 'Password must be at least 8 characters long',
+              },
+            }}
+            placeholder="Password"
+            secureTextEntry
           />
-        </View>
+          <CustomInput
+            name={'confirmPassword'}
+            control={control}
+            rules={{
+              validate: value =>
+                value === password ? true : 'Passwords do not match',
+            }}
+            placeholder="Confirm Password"
+            secureTextEntry
+          />
 
-        <Text style={styles.text}>
-          Already have an account?{' '}
-          <Text onPress={onSignInPressed} style={styles.signInLink}>
-            Sign in
+          <Text style={styles.text}>
+            By registering, you confirm that you accept our{' '}
+            <Text onPress={onTermsOfUsePressed} style={styles.textLink}>
+              Terms of Use
+            </Text>{' '}
+            and{' '}
+            <Text onPress={onPrivacyPolicyPressed} style={styles.textLink}>
+              Privacy Policy
+            </Text>
+            .
           </Text>
-        </Text>
-      </View>
-    </ScrollView>
+
+          <View style={styles.signUpBtn}>
+            <CustomButton
+              text="Sign Up"
+              onPress={handleSubmit(onSignUpPressed)}
+            />
+          </View>
+
+          <Text style={styles.text}>
+            Already have an account?{' '}
+            <Text onPress={onSignInPressed} style={styles.signInLink}>
+              Sign in
+            </Text>
+          </Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

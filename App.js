@@ -6,16 +6,52 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, StyleSheet} from 'react-native';
+import AuthNavigation from './src/authNavigation';
+import TabNavigation from './src/tabNavigation';
+import {Amplify, Auth, Hub} from 'aws-amplify';
+import config from '../gbeerapp/src/aws-exports';
 
-import Navigation from '../gbeerapp/src/navigation';
+Amplify.configure(config);
 
 const App = () => {
+  // checks if user is logged in, if logged in show TabNavigator, if not show AuthNavigator
+  const [user, setUser] = useState(undefined);
+
+  const checkUser = async () => {
+    try {
+      const authUser = await Auth.currentAuthenticatedUser({bypassCache: true});
+      setUser(authUser);
+    } catch (e) {
+      setUser(null);
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  useEffect(() => {
+    const listener = data => {
+      if (data.payload.event === 'signIn' || data.payload.event === 'signOut') {
+        checkUser();
+      }
+    };
+    Hub.listen('auth', listener);
+    return () => Hub.remove('auth', listener);
+  });
+
   return (
-    <SafeAreaView style={styles.root}>
-      <Navigation />
-    </SafeAreaView>
+    <View style={styles.root}>
+      {user ? (
+        <>
+          <TabNavigation />
+        </>
+      ) : (
+        <AuthNavigation />
+      )}
+    </View>
   );
 };
 

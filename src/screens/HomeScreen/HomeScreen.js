@@ -1,12 +1,15 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import {Auth} from 'aws-amplify';
+import React from 'react';
+
+import Map from '../../components/Map';
 
 const HomeScreen = () => {
-    return (
-        <View>
-            <Text> This is the Home Screen!</Text>
-        </View>
-    )
-}
 
-export default HomeScreen
+  return (
+    <>
+      <Map></Map>
+    </>
+  );
+};
+
+export default HomeScreen;

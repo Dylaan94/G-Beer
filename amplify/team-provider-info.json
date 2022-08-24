@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-gbeer-staging-195331-authRole",
+      "UnauthRoleArn": "arn:aws:iam::961260690469:role/amplify-gbeer-staging-195331-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::961260690469:role/amplify-gbeer-staging-195331-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-gbeer-staging-195331-deployment",
+      "UnauthRoleName": "amplify-gbeer-staging-195331-unauthRole",
+      "StackName": "amplify-gbeer-staging-195331",
+      "StackId": "arn:aws:cloudformation:us-east-2:961260690469:stack/amplify-gbeer-staging-195331/a20ec730-0865-11ed-a26c-0a6c0ceae42e",
+      "AmplifyAppId": "d2a69aowc177uv"
+    },
+    "categories": {
+      "auth": {
+        "GBeer": {}
+      }
+    }
+  }
+}
