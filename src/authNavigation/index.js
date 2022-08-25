@@ -10,8 +10,6 @@ import RegistrationScreen from '../screens/RegistrationScreen';
 import ConfirmSignUpScreen from '../screens/ConfirmSignUpScreen';
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import NewPasswordScreen from '../screens/NewPasswordScreen';
-import HomeScreen from '../screens/HomeScreen';
-import OtherScreen from '../screens/OtherScreen';
 import {Auth, Hub} from 'aws-amplify';
 const Stack = createNativeStackNavigator();
 
@@ -47,7 +45,6 @@ const AuthNavigation = () => {
               name="NewPasswordScreen"
               component={NewPasswordScreen}
             />
-            <Stack.Screen name="OtherScreen" component={OtherScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

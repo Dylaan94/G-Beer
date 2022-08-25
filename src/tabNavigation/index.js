@@ -17,14 +17,6 @@ import {faUser} from '@fortawesome/free-solid-svg-icons/faUser';
 
 const Tab = createBottomTabNavigator();
 
-const MyTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    background: 'white',
-  },
-};
-
 const iconFunc = icon => {
   return <FontAwesomeIcon icon={icon} size={18} />;
 };

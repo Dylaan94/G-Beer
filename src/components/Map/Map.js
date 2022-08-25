@@ -18,6 +18,35 @@ const Map = () => {
       key: 0,
       imageSource:
         'https://onomichibeer.com/wp-content/uploads/2021/04/top01-2.jpg',
+      beerList: [
+        {
+          name: 'Onomichi Pale Ale',
+          beerType: 'Pale Ale',
+          alcoholPercentage: '5%',
+          ubi: '20',
+          tastingNotes: ['Fruity', 'Hoppy'],
+          hops: ['Mukaishima', 'Onomichi'],
+          rating: '4.5',
+          image:
+            'https://s3-ap-northeast-1.amazonaws.com/public-my-beer-2/uploads/beer/image/4315/fc7a1019-2292-483d-8e48-4be17b593bab.png',
+          description:
+            'Here there should be a more in depth description of the beer - given by the brewery Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ',
+        },
+        {
+          name: 'Shimanami Golden Ale',
+          beerType: 'Golden Ale',
+          alcoholPercentage: '5%',
+          ubi: '25',
+          TastingNotes: ['Fruity', 'Sweet', 'Easy to drink'],
+          Hops: ['Onomichi', 'Hokkaido'],
+          Rating: '4.8',
+          image: {},
+          Decription:
+            'Here there should be a more in depth description of the beer - given by the brewery Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ',
+        },
+      ],
+      foodList: [{}],
+      photoList: [{}],
     },
     {
       latitude: 34.40855942896555,
