@@ -1,22 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {SafeAreaView} from 'react-native';
 
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 //component imports
 import BreweryHeader from '../../components/BreweryHeader';
-import BreweryBeerList from '../../components/BreweryBeerList';
-import BreweryFoodList from '../../components/BreweryFoodList';
-import BreweryPhotoList from '../../components/BreweryPhotoList';
+import BreweryBeerHomeScreen from '../BreweryBeerHomeScreen';
+import BreweryFoodHomeScreen from '../BreweryFoodHomeScreen';
+import BreweryPhotoHomeScreen from '../BreweryPhotoHomeScreen';
+import BeerInfoScreen from '../../components/BeerInfo';
 
 const Tab = createMaterialTopTabNavigator();
+const Stack = createNativeStackNavigator();
 
 // gets data from BreweryModal to be rendered to each page
-const BreweryHomeScreen = ({ route }) => {
-  
-  let data = route.params.data
+const BreweryHomeScreen = ({route}) => {
+  let data = route.params.data;
   return (
     <>
       <SafeAreaView>
@@ -24,26 +26,26 @@ const BreweryHomeScreen = ({ route }) => {
       </SafeAreaView>
       <NavigationContainer independent={true}>
         <Tab.Navigator
-          initialRouteName="BreweryBeerList"
+          initialRouteName="BreweryBeerHomeScreen"
           screenOptions={{
             tabBarLabelStyle: {fontSize: 16, fontWeight: 'bold'},
             tabBarStyle: {backgroundColor: 'powderblue'},
             tabBarIndicatorStyle: {backgroundColor: 'orange'},
           }}>
           <Tab.Screen
-            name="BreweryFoodList"
-            component={BreweryFoodList}
+            name="BreweryFoodHomeScreen"
+            component={BreweryFoodHomeScreen}
             options={{tabBarLabel: '料理'}}
           />
           <Tab.Screen
-            name="BreweryBeerList"
-            component={BreweryBeerList}
-            options={{ tabBarLabel: 'ビール' }}
-            initialParams={{key:data}}
+            name="BreweryBeerHomeScreen"
+            component={BreweryBeerHomeScreen}
+            options={{tabBarLabel: 'ビール'}}
+            initialParams={{key: data}}
           />
           <Tab.Screen
-            name="BreweryPhotoList"
-            component={BreweryPhotoList}
+            name="BreweryPhotoHomeScreen"
+            component={BreweryPhotoHomeScreen}
             options={{tabBarLabel: '写真'}}
           />
         </Tab.Navigator>

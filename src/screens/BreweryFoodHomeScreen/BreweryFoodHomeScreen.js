@@ -2,7 +2,7 @@ import {Text, ScrollView} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-const BreweryFoodList = () => {
+const BreweryFoodHomeScreen = () => {
   return (
     <>
       <Text> Food list </Text>
@@ -10,4 +10,4 @@ const BreweryFoodList = () => {
   );
 };
 
-export default BreweryFoodList;
+export default BreweryFoodHomeScreen;
