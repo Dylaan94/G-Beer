@@ -41,7 +41,7 @@ const BreweryHomeScreen = ({route}) => {
             name="BreweryBeerHomeScreen"
             component={BreweryBeerHomeScreen}
             options={{tabBarLabel: 'ビール'}}
-            initialParams={{key: data}}
+            initialParams={{ key: data }}
           />
           <Tab.Screen
             name="BreweryPhotoHomeScreen"

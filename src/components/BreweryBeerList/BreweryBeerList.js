@@ -9,23 +9,22 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import BeerListItem from '../../components/BeerListItem';
 
 const BreweryBeerList = ({route}) => {
-     let data = route.params.key;
+  let data = route.params.key;
 
   const Stack = createNativeStackNavigator();
 
   const navigation = useNavigation();
 
   // need to map the results here
-    let testBeer = data.beerList[0];
+  let testBeer = data.beerList[0];
 
   const onBeerPressed = () => {
-    navigation.navigate('BeerInfo');
+    navigation.navigate('BeerInfo', (params = {testBeer}));
     console.warn('beer pressed');
   };
 
   return (
     <ScrollView>
-      {console.log(data)}
       <Pressable onPress={onBeerPressed}>
         {console.log(data.beerList[1])}
         <BeerListItem

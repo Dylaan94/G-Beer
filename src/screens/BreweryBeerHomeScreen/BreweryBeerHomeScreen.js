@@ -1,5 +1,4 @@
 import React from 'react';
-import {useNavigation, useRoute} from '@react-navigation/native';
 
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -10,12 +9,13 @@ import BeerInfo from '../../components/BeerInfo';
 
 const BreweryBeerHomeScreen = ({route}) => {
   let data = route.params.key;
-  
+
   const Stack = createNativeStackNavigator();
 
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Navigator
+        screenOptions={{headerShown: false}}>
         <Stack.Screen
           name="BreweryBeerList"
           component={BreweryBeerList}
