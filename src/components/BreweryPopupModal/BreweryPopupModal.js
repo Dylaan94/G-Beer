@@ -4,7 +4,7 @@ import React from 'react';
 import testPhoto from '../../../assets/images/OnomichiBreweryTest.png';
 import CustomButton from '../CustomButton';
 
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {Auth} from 'aws-amplify';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
@@ -16,7 +16,9 @@ const BreweryPopupModal = ({data}) => {
   const {name, key, imageSource} = data;
 
   const onEnterPressed = () => {
-    navigation.navigate('BreweryHomeScreen');
+    navigation.navigate('BreweryHomeScreen', {
+      data: data
+    });
   };
 
   const onDirectionsPressed = () => {

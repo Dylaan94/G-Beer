@@ -11,14 +11,15 @@ import {
 } from 'react-native';
 import Logo from '../../../assets/images/Logo_HQ.png';
 
+// Component imports
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 
 import {useNavigation, useRoute} from '@react-navigation/native';
 
+// Form and AWS imports
 import {useForm} from 'react-hook-form';
 import {Auth} from 'aws-amplify';
-import Navigation from '../../authNavigation';
 
 const ConfirmSignUpScreen = () => {
   const route = useRoute();
