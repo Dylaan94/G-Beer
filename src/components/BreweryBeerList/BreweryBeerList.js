@@ -18,25 +18,33 @@ const BreweryBeerList = ({route}) => {
   // need to map the results here
   let testBeer = data.beerList[0];
 
-  const onBeerPressed = () => {
-    navigation.navigate('BeerInfo', (params = {testBeer}));
-    console.warn('beer pressed');
+  const onBeerPressed = key => {
+      let beerData = data.beerList[key];
+      
+
+    //console.log(beerData);
+    navigation.navigate('BeerInfo', (params = {beerData: beerData}));
+
   };
 
   return (
     <ScrollView>
-      <Pressable onPress={onBeerPressed}>
-        {console.log(data.beerList[1])}
-        <BeerListItem
-          beerName={testBeer.name}
-          beerType={testBeer.beerType}
-          alcoholPercentage={testBeer.alcoholPercentage}
-          ubi={testBeer.ubi}
-          tastingNotes={testBeer.tastingNotes}
-          hops={testBeer.hops}
-          image={testBeer.image}
-        />
-      </Pressable>
+      {data.beerList.map(beer => {
+        return (
+          <Pressable onPress={() => onBeerPressed(beer.key)}>
+            <BeerListItem
+              beerName={beer.name}
+              beerType={beer.beerType}
+              alcoholPercentage={beer.alcoholPercentage}
+              ubi={beer.ubi}
+              tastingNotes={beer.tastingNotes}
+              hops={beer.hops}
+              image={beer.image}
+              key={beer.key}
+            />
+          </Pressable>
+        );
+      })}
     </ScrollView>
   );
 };

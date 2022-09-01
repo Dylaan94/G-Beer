@@ -6,10 +6,15 @@ import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCaretLeft} from '@fortawesome/free-solid-svg-icons/faCaretLeft';
 
+import {useNavigation, useRoute} from '@react-navigation/native';
+
 const CustomBackButtonMini = () => {
   const tabBarHeight = useBottomTabBarHeight();
 
+  const navigation = useNavigation();
+
   const onPressed = () => {
+    navigation.goBack();
     console.warn('back button pressed');
   };
 
