@@ -31,18 +31,21 @@ const Map = () => {
             'https://s3-ap-northeast-1.amazonaws.com/public-my-beer-2/uploads/beer/image/4315/fc7a1019-2292-483d-8e48-4be17b593bab.png',
           description:
             'Here there should be a more in depth description of the beer - given by the brewery Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ',
+          key: 0,
         },
         {
           name: 'Shimanami Golden Ale',
           beerType: 'Golden Ale',
           alcoholPercentage: '5%',
           ubi: '25',
-          TastingNotes: ['Fruity', 'Sweet', 'Easy to drink'],
-          Hops: ['Onomichi', 'Hokkaido'],
-          Rating: '4.8',
-          image: {},
-          Decription:
+          tastingNotes: ['Fruity', 'Sweet'],
+          hops: ['Onomichi', 'Hokkaido'],
+          rating: '4.8',
+          image:
+            'https://assets.untappd.com/photos/2021_04_17/eab098cb22125fbd6b3802d7b6537034_640x640.jpg',
+          description:
             'Here there should be a more in depth description of the beer - given by the brewery Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ',
+          key: 1,
         },
       ],
       foodList: [{}],

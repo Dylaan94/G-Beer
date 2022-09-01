@@ -9,8 +9,10 @@ import {
 } from 'react-native';
 import React from 'react';
 
-// icon imports
+// component imports
+import BackButtonChevron from '../BackButtonChevron/BackButtonChevron';
 
+// icon imports
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faStar} from '@fortawesome/free-solid-svg-icons';
 
@@ -18,44 +20,42 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 
 const BeerInfo = ({route}) => {
   const navigation = useNavigation();
-  let data = route.params;
-  let testBeer = data.testBeer;
-
-  const {width, height} = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
+  
+  let beerData = route.params.beerData;
 
   const goBackPressed = () => {
     navigation.goBack();
   };
   return (
     <ScrollView>
+      {console.log(beerData)}
       <View style={styles.root}>
-        <Pressable onPress={goBackPressed}>
-          <Text>Go back to beer list</Text>
-        </Pressable>
+        <BackButtonChevron onPressed={goBackPressed} />
         <Image
-          source={{uri: testBeer.image}}
+          source={{uri: beerData.image}}
           style={[{height: height * 0.4}, styles.image]}></Image>
-        <Text style={styles.title}>{testBeer.name}</Text>
+        <Text style={styles.title}>{beerData.name}</Text>
         <View style={[{width: width * 0.9}, styles.beerInfo]}>
           <View style={[styles.beerInfoLeft]}>
             <Text>
               <Text style={styles.boldText}>Beer Type: </Text>
-              {testBeer.beerType}
+              {beerData.beerType}
             </Text>
             <Text>
               <Text style={styles.boldText}>Alcohol Percentage: </Text>{' '}
-              {testBeer.alcoholPercentage}
+              {beerData.alcoholPercentage}
             </Text>
             <Text>
-              <Text style={styles.boldText}>UBI: </Text> {testBeer.ubi}
+              <Text style={styles.boldText}>UBI: </Text> {beerData.ubi}
             </Text>
             <Text>
               <Text style={styles.boldText}>Tasting Notes: </Text>
-              {testBeer.tastingNotes.join(', ')}
+              {beerData.tastingNotes.join(', ')}
             </Text>
             <Text>
               <Text style={styles.boldText}>Hops: </Text>{' '}
-              {testBeer.hops.join(', ')}
+              {beerData.hops.join(', ')}
             </Text>
           </View>
           <View style={[styles.beerInfoRight]}>
@@ -64,7 +64,7 @@ const BeerInfo = ({route}) => {
             </View>
 
             <Text>
-              {testBeer.rating}
+              {beerData.rating}
               <Text> Rating</Text>
             </Text>
           </View>
@@ -74,7 +74,7 @@ const BeerInfo = ({route}) => {
             <Text style={styles.boldText}>Description</Text>
           </View>
           <View>
-            <Text>{testBeer.description}</Text>
+            <Text>{beerData.description}</Text>
           </View>
         </View>
       </View>
